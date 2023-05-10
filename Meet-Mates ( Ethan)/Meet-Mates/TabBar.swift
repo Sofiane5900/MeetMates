@@ -37,7 +37,7 @@ struct TabBar: View {
                           }.toolbar(.visible, for: .tabBar)
                       
                           .toolbarBackground(
-                              Color.white,
+                              Color.black,
                               for: .tabBar)
                       
                       Profil()
@@ -47,11 +47,11 @@ struct TabBar: View {
                           }.toolbar(.visible, for: .tabBar)
                       
                           .toolbarBackground(
-                              Color.white,
+                              Color.black,
                               for: .tabBar)
                       
                   }.accentColor(Color("customRed"))
-                
+                     
 
                  
               }

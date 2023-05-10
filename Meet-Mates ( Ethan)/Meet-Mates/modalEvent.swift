@@ -1,6 +1,7 @@
 import SwiftUI
 import MapKit
 
+
 struct modalEvent: View {
     @Binding var showEventSheet: Bool
     @Binding var eventAnnotations: [EventAnnotation]
@@ -8,6 +9,8 @@ struct modalEvent: View {
     @State private var address = ""
     @State private var discordLink = ""
     @State private var description = ""
+    
+    @Environment (\.dismiss) var dimiss
     
     var body: some View {
         ZStack {
@@ -22,8 +25,16 @@ struct modalEvent: View {
                 endPoint: .bottom
             )
                 .ignoresSafeArea()
+          
+                Button("Retour"){
+                    dimiss()
+                }.position(x:50, y:30)
+                    .foregroundColor(Color("customRed"))
+                
+            
             VStack {
-                Spacer()
+                
+             Spacer()
                 
                 Image("logo")
                     .resizable()

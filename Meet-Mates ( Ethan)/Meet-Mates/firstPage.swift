@@ -9,12 +9,13 @@ import SwiftUI
 
 struct firstPage: View {
     
+    @State var isFavorisToggled : Bool = false
     
     var body: some View {
-        NavigationStack{
+        NavigationView{
             ZStack {
                 LinearGradient(gradient: Gradient(colors: [Color("customGray").opacity(2.0), Color("customGray").opacity(0.8)]), startPoint: .top, endPoint: .bottom)
-                 
+                    .ignoresSafeArea()
                     
                 ScrollView{
                     
@@ -58,10 +59,15 @@ struct firstPage: View {
                                         
                                         Text(evenement.EvenementFromUserDesc)
                                     }.foregroundColor(.white)
+                                    
+                                   
+                                  
                                     Spacer()
+                                    
                                     
                                 }
                                 
+                               
                             }
                         }
                         .tabViewStyle(.page)

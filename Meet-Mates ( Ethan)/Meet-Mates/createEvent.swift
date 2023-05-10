@@ -1,6 +1,7 @@
 import SwiftUI
 import MapKit
 
+
 // Structure pour stocker les informations de chaque événement
 struct EventAnnotation: Identifiable {
     var id = UUID()
@@ -13,6 +14,9 @@ struct EventAnnotation: Identifiable {
 
 
 struct CreateEventView: View {
+    
+    @State var showingDetail = false
+    
     @State var eventTitle = ""
     @State var eventAddress = ""
     @State var eventDiscordLink = ""
@@ -36,20 +40,30 @@ struct CreateEventView: View {
     
     @State var buttonAnimation = false
     @State var createEvent = false
-    
+    @State var animation = false
+
     var body: some View {
         
         ZStack {
-            LinearGradient(
-                gradient: Gradient(
-                    colors: [
-                        Color("customGray").opacity(2.0),
-                        Color("customGray").opacity(0.8)
-                    ]
-                ),
-                startPoint: .top,
-                endPoint: .bottom
-            )
+            
+            LinearGradient(gradient: Gradient(colors: [Color.black.opacity(2.0), Color(.black).opacity(1.0)]), startPoint: .top, endPoint: .bottom)
+                                .ignoresSafeArea()
+            
+            Circle()
+                .foregroundColor(Color("darkRed"))
+                            .blur(radius: animation ? 80 : 120)
+                            .offset(x: animation ? -50 : -130, y: animation ? -30 : -100)
+                            .task {
+                                withAnimation(.easeInOut(duration: 2).repeatForever()) {
+                                    animation.toggle()
+
+                                }
+                            }
+
+                        Circle()
+                            .foregroundColor(Color("darkRed"))
+                            .blur(radius: animation ? 80 : 120)
+                            .offset(x: animation ? 100 : 130, y: animation ? 150 : 100)
             .ignoresSafeArea()
             
             VStack {
@@ -63,8 +77,10 @@ struct CreateEventView: View {
                         VStack {
                             Image(systemName: "gamecontroller.fill")
                                 .foregroundColor(.red)
+                                .shadow(color: .black, radius: 2)
                             Text(event.title)
                                 .font(.subheadline)
+                                .shadow(color: .black, radius: 1)
                                 .bold()
                                 .foregroundColor(.red)
                                 .onTapGesture {
@@ -126,10 +142,12 @@ struct CreateEventView: View {
                         
                                 TextField("Description de l'event", text: $description)
                                     .disabled(true)
+                                
                                     .foregroundColor(.black)
                                     .font(Font.system(size: 20, weight: .regular))
                                     .padding(.vertical, 10)
-                                    .padding(.horizontal, 20)
+                                   .padding(.horizontal, 20)
+                                
                                     .background(Color.white)
                                     .cornerRadius(20)
                                 
@@ -157,17 +175,19 @@ struct CreateEventView: View {
                                 .scaleEffect(buttonAnimation ? 1.1 : 1.0) // ternaire, si buttonAnimation vrai le button upscale, sinons il downscale
                                 .fullScreenCover(isPresented: $createEvent) {
                                     modalEvent(showEventSheet: $createEvent, eventAnnotations: $eventAnnotations)
+                                    
                                 }
+                            
 
 
                                                     })
+            }
+        }
                         
                     }
                     
-        };                             
-                
-            }
         }
+        
 
 
         struct CreateEventView_Previews: PreviewProvider {

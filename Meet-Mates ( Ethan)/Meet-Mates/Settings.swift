@@ -10,11 +10,12 @@ import SwiftUI
 
 struct Settings: View {
     
-    
-    
     @AppStorage("imageData") var selectedImage: Data?
     @State var avatarItem: PhotosPickerItem?
     @State var avatarImage: Image?
+    
+    
+    
     
     var body: some View {
         ZStack {
@@ -51,6 +52,10 @@ struct Settings: View {
                 }
                 
                 Spacer()
+                VStack{
+                    Text("futuretextfield")
+                    
+                }
                 
             }
         

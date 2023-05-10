@@ -19,11 +19,11 @@ struct home: View {
        
         
             ZStack{
-                LinearGradient(gradient: Gradient(colors: [Color.black.opacity(6), Color(.black).opacity(0.8)]), startPoint: .top, endPoint: .bottom)
+                LinearGradient(gradient: Gradient(colors: [Color.black.opacity(2.0), Color(.black).opacity(1.0)]), startPoint: .top, endPoint: .bottom)
                                     .ignoresSafeArea()
                 
                 Circle()
-                    .foregroundColor(Color("customGray"))
+                    .foregroundColor(Color("darkRed"))
                                 .blur(radius: animation ? 80 : 120)
                                 .offset(x: animation ? -50 : -130, y: animation ? -30 : -100)
                                 .task {
@@ -34,7 +34,7 @@ struct home: View {
                                 }
 
                             Circle()
-                                .foregroundColor(Color("customGray"))
+                                .foregroundColor(Color("darkRed"))
                                 .blur(radius: animation ? 80 : 120)
                                 .offset(x: animation ? 100 : 130, y: animation ? 150 : 100)
                 
@@ -42,6 +42,7 @@ struct home: View {
                     Image("logo")
                         .resizable()
                         .aspectRatio(contentMode: .fit)
+                        .shadow(color: .black, radius: 10)
                         .frame(width:220 ,height: 220)
                     Spacer()
                     
@@ -51,6 +52,7 @@ struct home: View {
                         .font(.largeTitle)
                         .fontWeight(.heavy)
                         .foregroundColor(.red)
+                        .shadow(color: .black, radius: 10)
                         .padding(.bottom, 90)
                     
                     
@@ -67,6 +69,8 @@ struct home: View {
                            }, label: {
                                Text("Accédez à l'application")
                       .fontWeight(.semibold)
+                      .shadow(color: .black, radius: 10)
+
                       .foregroundColor(.white)
                       .padding(.horizontal, 50.0)
                       .padding()
@@ -83,6 +87,7 @@ struct home: View {
                     Text("En continuant, vous acceptez les conditions générales d'utilisation.")
                         .font(.system(size: 14))
                         .padding(.top, 500.0)
+                        .shadow(color: .black, radius: 10)
                         .foregroundColor(Color.gray)
                 }
             }

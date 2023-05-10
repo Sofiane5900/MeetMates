@@ -13,12 +13,32 @@ struct Profil: View {
     
     @AppStorage("imageData") var selectedImage: Data?
     
+    @State var animation = false
+
     var body: some View {
         
     NavigationStack{
         ZStack{
-            LinearGradient(gradient: Gradient(colors: [Color("customGray").opacity(2.0), Color("customGray").opacity(0.8)]), startPoint: .top, endPoint: .bottom)
-                .edgesIgnoringSafeArea(.top)
+            LinearGradient(gradient: Gradient(colors: [Color.black.opacity(2.0), Color(.black).opacity(1.0)]), startPoint: .top, endPoint: .bottom)
+                
+            
+            
+            Circle()
+                .foregroundColor(Color("darkRed"))
+                            .blur(radius: animation ? 80 : 120)
+                            .offset(x: animation ? -50 : -130, y: animation ? -30 : -100)
+                            .task {
+                                withAnimation(.easeInOut(duration: 2).repeatForever()) {
+                                    animation.toggle()
+
+                                }
+                            }
+
+                        Circle()
+                            .foregroundColor(Color("darkRed"))
+                            .blur(radius: animation ? 80 : 120)
+                            .offset(x: animation ? 100 : 130, y: animation ? 150 : 100)
+            
             VStack{
                 
                 HStack{
@@ -27,6 +47,7 @@ struct Profil: View {
                     Image(uiImage: UIImage(data: selectedImage ?? Data()) ?? UIImage(named: "userImage")!)
                         .resizable()
                         .frame(width: 150, height: 150)
+                        .shadow(color: .black, radius: 10)
                         .clipShape(Circle())
                     
                     Spacer()
@@ -45,9 +66,11 @@ struct Profil: View {
                 Text("\(user.userName)")
                     .font(.system(size: 25))
                     .foregroundColor(.white)
+                    .shadow(color: .black, radius: 10)
                 
                 Text("\(user.discordAccount)")
                     .foregroundColor(.white)
+                    .shadow(color: .black, radius: 10)
                 
                 Spacer()
                 
@@ -55,6 +78,7 @@ struct Profil: View {
                     
                     Text("À propos de moi : ")
                         .foregroundColor(.white)
+                        .shadow(color: .black, radius: 10)
                         .padding()
                     
                     Text("\(user.aboutMe)")
@@ -66,11 +90,13 @@ struct Profil: View {
                 }
                 Text("Mon prochain event :")
                     .foregroundColor(.white)
+                    .shadow(color: .black, radius: 10)
                 
                 Rectangle()
                     .foregroundColor(Color.gray.opacity(0.5))
                     .frame(width: 330, height: 200)
                     .cornerRadius(10)
+                
                 Spacer()
                 
                }
